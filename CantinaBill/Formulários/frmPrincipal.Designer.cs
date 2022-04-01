@@ -31,6 +31,7 @@ namespace CantinaBill
         {
             this.btnPessoas = new MetroFramework.Controls.MetroTile();
             this.btnProdutos = new MetroFramework.Controls.MetroTile();
+            this.btnVender = new MetroFramework.Controls.MetroTile();
             this.SuspendLayout();
             // 
             // btnPessoas
@@ -57,11 +58,24 @@ namespace CantinaBill
             this.btnProdutos.UseSelectable = true;
             this.btnProdutos.Click += new System.EventHandler(this.btnProdutos_Click);
             // 
+            // btnVender
+            // 
+            this.btnVender.ActiveControl = null;
+            this.btnVender.Location = new System.Drawing.Point(325, 103);
+            this.btnVender.Name = "btnVender";
+            this.btnVender.Size = new System.Drawing.Size(195, 81);
+            this.btnVender.TabIndex = 4;
+            this.btnVender.Text = "Vender";
+            this.btnVender.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnVender.UseSelectable = true;
+            this.btnVender.Click += new System.EventHandler(this.btnVender_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnVender);
             this.Controls.Add(this.btnProdutos);
             this.Controls.Add(this.btnPessoas);
             this.Name = "frmPrincipal";
@@ -75,6 +89,7 @@ namespace CantinaBill
 
         private MetroFramework.Controls.MetroTile btnPessoas;
         private MetroFramework.Controls.MetroTile btnProdutos;
+        private MetroFramework.Controls.MetroTile btnVender;
     }
 }
 

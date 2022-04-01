@@ -22,7 +22,7 @@ namespace CantinaBill.Formulários.Pessoas
             ExibeDados();
         }
 
-        void ExibeDados()
+        public void ExibeDados()
         {
             dgvPessoas.AutoGenerateColumns = false;
             using (CantinaBillEntities db = new CantinaBillEntities())

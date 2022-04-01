@@ -1,5 +1,7 @@
-﻿using CantinaBill.Formulários.Pessoas;
+﻿using CantinaBill.Formulários.Lista_Auxiliar;
+using CantinaBill.Formulários.Pessoas;
 using CantinaBill.Formulários.Produtos;
+using CantinaBill.Formulários.Vender;
 using System;
 
 namespace CantinaBill
@@ -21,6 +23,12 @@ namespace CantinaBill
         {
             lstProdutos ListaProdutos = new lstProdutos();
             ListaProdutos.Show();
+        }
+
+        private void btnVender_Click(object sender, EventArgs e)
+        {
+            frmVenda TelaVenda = new frmVenda();
+            TelaVenda.Show();
         }
     }
 }
