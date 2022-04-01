@@ -28,15 +28,12 @@ namespace CantinaBill.Formulários.Vender
         private void btnAddItem_Click(object sender, EventArgs e)
         {
 
-            ItemVenda iten_venda = new ItemVenda( txtNomeProduto.Text,  decimal.Parse(txtPrecoVenda.Text),
+            ItemVenda item_venda = new ItemVenda( txtNomeProduto.Text,  decimal.Parse(txtPrecoVenda.Text),
             decimal.Parse(txtTotalItem.Text), int.Parse(txtQuantidade.Text));
 
-            ListaItem.Add(iten_venda);
-            
-           //ListaItem.Add(new ItemVenda() { NomeItem = txtNomeProduto.Text, PVenda = decimal.Parse(txtPrecoVenda.Text),
-           //TotalItem = decimal.Parse(txtTotalItem.Text), Quantidade = int.Parse(txtQuantidade.Text) });
+            ListaItem.Add(item_venda);
 
-           dgvItens.DataSource = ListaItem;
+            dgvItens.DataSource = ListaItem.ToList();
             
         }
 
