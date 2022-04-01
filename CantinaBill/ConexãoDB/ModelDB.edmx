@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CantinaBillModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Item_Venda">
+          <Key>
+            <PropertyRef Name="idItem" />
+          </Key>
+          <Property Name="idItem" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idVenda" Type="int" Nullable="false" />
+          <Property Name="idProduto" Type="int" Nullable="false" />
+          <Property Name="Quantidade" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Val_Un" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Valor_Total" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="Pessoa">
+          <Key>
+            <PropertyRef Name="idPessoa" />
+          </Key>
+          <Property Name="idPessoa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="60" />
+          <Property Name="Rua" Type="varchar" MaxLength="60" />
+          <Property Name="Numero" Type="int" />
+          <Property Name="Bairro" Type="varchar" MaxLength="50" />
+          <Property Name="Cidade" Type="varchar" MaxLength="50" />
+          <Property Name="Telefone" Type="varchar" MaxLength="13" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="idProduto" />
+          </Key>
+          <Property Name="idProduto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome_Produto" Type="varchar" MaxLength="50" />
+          <Property Name="Preco_Venda" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="Venda">
+          <Key>
+            <PropertyRef Name="idVenda" />
+          </Key>
+          <Property Name="idVenda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPessoa" Type="int" Nullable="false" />
+          <Property Name="Data_venda" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="1" />
+          <Property Name="Subtotal" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Desconto" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Taxa_Entrega" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Valor_Total" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <Association Name="FK_Item_Venda_Produto">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="Item_Venda" Type="Self.Item_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="idProduto" />
+            </Principal>
+            <Dependent Role="Item_Venda">
+              <PropertyRef Name="idProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Venda_Venda">
+          <End Role="Venda" Type="Self.Venda" Multiplicity="1" />
+          <End Role="Item_Venda" Type="Self.Item_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venda">
+              <PropertyRef Name="idVenda" />
+            </Principal>
+            <Dependent Role="Item_Venda">
+              <PropertyRef Name="idVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Venda_Pessoa">
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="1" />
+          <End Role="Venda" Type="Self.Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pessoa">
+              <PropertyRef Name="idPessoa" />
+            </Principal>
+            <Dependent Role="Venda">
+              <PropertyRef Name="idPessoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CantinaBillModelStoreContainer">
+          <EntitySet Name="Item_Venda" EntityType="Self.Item_Venda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pessoa" EntityType="Self.Pessoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Venda" EntityType="Self.Venda" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Item_Venda_Produto" Association="Self.FK_Item_Venda_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Item_Venda" EntitySet="Item_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Venda_Venda" Association="Self.FK_Item_Venda_Venda">
+            <End Role="Venda" EntitySet="Venda" />
+            <End Role="Item_Venda" EntitySet="Item_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Venda_Pessoa" Association="Self.FK_Venda_Pessoa">
+            <End Role="Pessoa" EntitySet="Pessoa" />
+            <End Role="Venda" EntitySet="Venda" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CantinaBillModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Item_Venda">
+          <Key>
+            <PropertyRef Name="idItem" />
+          </Key>
+          <Property Name="idItem" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idVenda" Type="Int32" Nullable="false" />
+          <Property Name="idProduto" Type="Int32" Nullable="false" />
+          <Property Name="Quantidade" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Val_Un" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Valor_Total" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="Produto" Relationship="Self.FK_Item_Venda_Produto" FromRole="Item_Venda" ToRole="Produto" />
+          <NavigationProperty Name="Venda" Relationship="Self.FK_Item_Venda_Venda" FromRole="Item_Venda" ToRole="Venda" />
+        </EntityType>
+        <EntityType Name="Pessoa">
+          <Key>
+            <PropertyRef Name="idPessoa" />
+          </Key>
+          <Property Name="idPessoa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Rua" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Numero" Type="Int32" />
+          <Property Name="Bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefone" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Venda" Relationship="Self.FK_Venda_Pessoa" FromRole="Pessoa" ToRole="Venda" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="idProduto" />
+          </Key>
+          <Property Name="idProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome_Produto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Preco_Venda" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="Item_Venda" Relationship="Self.FK_Item_Venda_Produto" FromRole="Produto" ToRole="Item_Venda" />
+        </EntityType>
+        <EntityType Name="Venda">
+          <Key>
+            <PropertyRef Name="idVenda" />
+          </Key>
+          <Property Name="idVenda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPessoa" Type="Int32" Nullable="false" />
+          <Property Name="Data_venda" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Subtotal" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Desconto" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Taxa_Entrega" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Valor_Total" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="Item_Venda" Relationship="Self.FK_Item_Venda_Venda" FromRole="Venda" ToRole="Item_Venda" />
+          <NavigationProperty Name="Pessoa" Relationship="Self.FK_Venda_Pessoa" FromRole="Venda" ToRole="Pessoa" />
+        </EntityType>
+        <Association Name="FK_Item_Venda_Produto">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="Item_Venda" Type="Self.Item_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="idProduto" />
+            </Principal>
+            <Dependent Role="Item_Venda">
+              <PropertyRef Name="idProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Venda_Venda">
+          <End Role="Venda" Type="Self.Venda" Multiplicity="1" />
+          <End Role="Item_Venda" Type="Self.Item_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venda">
+              <PropertyRef Name="idVenda" />
+            </Principal>
+            <Dependent Role="Item_Venda">
+              <PropertyRef Name="idVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Venda_Pessoa">
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="1" />
+          <End Role="Venda" Type="Self.Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pessoa">
+              <PropertyRef Name="idPessoa" />
+            </Principal>
+            <Dependent Role="Venda">
+              <PropertyRef Name="idPessoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CantinaBillEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Item_Venda" EntityType="Self.Item_Venda" />
+          <EntitySet Name="Pessoa" EntityType="Self.Pessoa" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" />
+          <EntitySet Name="Venda" EntityType="Self.Venda" />
+          <AssociationSet Name="FK_Item_Venda_Produto" Association="Self.FK_Item_Venda_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Item_Venda" EntitySet="Item_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Venda_Venda" Association="Self.FK_Item_Venda_Venda">
+            <End Role="Venda" EntitySet="Venda" />
+            <End Role="Item_Venda" EntitySet="Item_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Venda_Pessoa" Association="Self.FK_Venda_Pessoa">
+            <End Role="Pessoa" EntitySet="Pessoa" />
+            <End Role="Venda" EntitySet="Venda" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CantinaBillModelStoreContainer" CdmEntityContainer="CantinaBillEntities">
+          <EntitySetMapping Name="Item_Venda">
+            <EntityTypeMapping TypeName="CantinaBillModel.Item_Venda">
+              <MappingFragment StoreEntitySet="Item_Venda">
+                <ScalarProperty Name="idItem" ColumnName="idItem" />
+                <ScalarProperty Name="idVenda" ColumnName="idVenda" />
+                <ScalarProperty Name="idProduto" ColumnName="idProduto" />
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+                <ScalarProperty Name="Val_Un" ColumnName="Val_Un" />
+                <ScalarProperty Name="Valor_Total" ColumnName="Valor_Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pessoa">
+            <EntityTypeMapping TypeName="CantinaBillModel.Pessoa">
+              <MappingFragment StoreEntitySet="Pessoa">
+                <ScalarProperty Name="idPessoa" ColumnName="idPessoa" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Rua" ColumnName="Rua" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produto">
+            <EntityTypeMapping TypeName="CantinaBillModel.Produto">
+              <MappingFragment StoreEntitySet="Produto">
+                <ScalarProperty Name="idProduto" ColumnName="idProduto" />
+                <ScalarProperty Name="Nome_Produto" ColumnName="Nome_Produto" />
+                <ScalarProperty Name="Preco_Venda" ColumnName="Preco_Venda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Venda">
+            <EntityTypeMapping TypeName="CantinaBillModel.Venda">
+              <MappingFragment StoreEntitySet="Venda">
+                <ScalarProperty Name="idVenda" ColumnName="idVenda" />
+                <ScalarProperty Name="idPessoa" ColumnName="idPessoa" />
+                <ScalarProperty Name="Data_venda" ColumnName="Data_venda" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="Desconto" ColumnName="Desconto" />
+                <ScalarProperty Name="Taxa_Entrega" ColumnName="Taxa_Entrega" />
+                <ScalarProperty Name="Valor_Total" ColumnName="Valor_Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
