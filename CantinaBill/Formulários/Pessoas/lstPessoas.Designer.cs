@@ -164,7 +164,10 @@ namespace CantinaBill.Formulários.Pessoas
             this.Controls.Add(this.btnDeletar);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnAdicionar);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "lstPessoas";
+            this.Resizable = false;
             this.Text = "Lista Pessoas";
             ((System.ComponentModel.ISupportInitialize)(this.dgvPessoas)).EndInit();
             this.ResumeLayout(false);

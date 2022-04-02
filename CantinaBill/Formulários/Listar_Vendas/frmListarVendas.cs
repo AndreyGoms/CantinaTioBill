@@ -48,25 +48,56 @@ namespace CantinaBill.Formulários.Listar_Vendas
         private void btnCancelarVenda_Click(object sender, EventArgs e)
         {
             string idVenda = dgvVendas.CurrentRow.Cells["idVenda"].Value.ToString();
+            string Status = dgvVendas.CurrentRow.Cells["Status"].Value.ToString();
 
             using (CantinaBillEntities db = new CantinaBillEntities())
             {
-                var RegistroVenda = (from Venda in db.Venda
-                                      where idVenda == Venda.idVenda.ToString()
-                                      select Venda).First();
+                if (Status != "C")
+                {
+                    var RegistroVenda = (from Venda in db.Venda
+                                         where idVenda == Venda.idVenda.ToString()
+                                         select Venda).First();
 
-                RegistroVenda.Status = "C";
+                    RegistroVenda.Status = "C";
 
-                db.Entry(RegistroVenda).State = EntityState.Modified;
-                db.SaveChanges();
-                ExbirVendas();
+                    db.Entry(RegistroVenda).State = EntityState.Modified;
+                    db.SaveChanges();
+                    ExbirVendas();
+                }
+                else
+                    MessageBox.Show("Venda já esta cancelada!");
             }
+        }
 
+        private void btnConluir_Click(object sender, EventArgs e)
+        {
+            string idVenda = dgvVendas.CurrentRow.Cells["idVenda"].Value.ToString();
+            string Status = dgvVendas.CurrentRow.Cells["Status"].Value.ToString();
+
+            using (CantinaBillEntities db = new CantinaBillEntities())
+            {
+                if (Status != "C" )
+                    if(Status != "F")
+                      {
+                        var RegistroVenda = (from Venda in db.Venda
+                                             where idVenda == Venda.idVenda.ToString()
+                                             select Venda).First();
+
+                         RegistroVenda.Status = "F";
+
+                         db.Entry(RegistroVenda).State = EntityState.Modified;
+                         db.SaveChanges();
+                         ExbirVendas();
+                        }
+                        else 
+                            MessageBox.Show("Venda está Finalizada!");
+            }
         }
 
         private void btnVoltar_Click(object sender, EventArgs e)
         {
             Close();
         }
+
     }
 }

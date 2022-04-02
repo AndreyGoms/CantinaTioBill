@@ -41,6 +41,7 @@ namespace CantinaBill.Formulários.Listar_Vendas
             this.Data_Venda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCancelarVenda = new MetroFramework.Controls.MetroButton();
             this.btnVoltar = new MetroFramework.Controls.MetroButton();
+            this.btnConluir = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVendas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,15 +153,29 @@ namespace CantinaBill.Formulários.Listar_Vendas
             this.btnVoltar.UseSelectable = true;
             this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
             // 
+            // btnConluir
+            // 
+            this.btnConluir.Location = new System.Drawing.Point(636, 457);
+            this.btnConluir.Name = "btnConluir";
+            this.btnConluir.Size = new System.Drawing.Size(131, 34);
+            this.btnConluir.TabIndex = 8;
+            this.btnConluir.Text = "Concluir Venda";
+            this.btnConluir.UseSelectable = true;
+            this.btnConluir.Click += new System.EventHandler(this.btnConluir_Click);
+            // 
             // frmListarVendas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1005, 514);
+            this.Controls.Add(this.btnConluir);
             this.Controls.Add(this.dgvVendas);
             this.Controls.Add(this.btnCancelarVenda);
             this.Controls.Add(this.btnVoltar);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmListarVendas";
+            this.Resizable = false;
             this.Text = "Lista de vendas";
             ((System.ComponentModel.ISupportInitialize)(this.dgvVendas)).EndInit();
             this.ResumeLayout(false);
@@ -181,5 +196,6 @@ namespace CantinaBill.Formulários.Listar_Vendas
         private System.Windows.Forms.DataGridViewTextBoxColumn Taxa_Entrega;
         private System.Windows.Forms.DataGridViewTextBoxColumn Valor_Total;
         private System.Windows.Forms.DataGridViewTextBoxColumn Data_Venda;
+        private MetroFramework.Controls.MetroButton btnConluir;
     }
 }

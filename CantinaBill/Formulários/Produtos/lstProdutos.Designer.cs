@@ -127,7 +127,10 @@ namespace CantinaBill.Formulários.Produtos
             this.Controls.Add(this.btnDeletar);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnAdicionar);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "lstProdutos";
+            this.Resizable = false;
             this.Text = "Lista Produtos";
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutos)).EndInit();
             this.ResumeLayout(false);

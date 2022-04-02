@@ -92,7 +92,9 @@ namespace CantinaBill
             this.Controls.Add(this.btnVender);
             this.Controls.Add(this.btnProdutos);
             this.Controls.Add(this.btnPessoas);
+            this.MaximizeBox = false;
             this.Name = "frmPrincipal";
+            this.Resizable = false;
             this.Text = "Cantina do Tio Bill";
             this.TextAlign = MetroFramework.Forms.MetroFormTextAlign.Center;
             this.ResumeLayout(false);

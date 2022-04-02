@@ -204,7 +204,10 @@ namespace CantinaBill.Formulários.Pessoas
             this.Controls.Add(this.txtRua);
             this.Controls.Add(this.lblNome);
             this.Controls.Add(this.txtNome);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "fchPessoa";
+            this.Resizable = false;
             this.Text = "Cadastrar Pessoa";
             this.ResumeLayout(false);
             this.PerformLayout();

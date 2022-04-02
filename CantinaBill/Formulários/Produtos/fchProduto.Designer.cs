@@ -126,7 +126,10 @@ namespace CantinaBill.Formulários.Produtos
             this.Controls.Add(this.txtIdProduto);
             this.Controls.Add(this.lblNome);
             this.Controls.Add(this.txtNome);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "fchProduto";
+            this.Resizable = false;
             this.Text = "Ficha Produto";
             this.ResumeLayout(false);
             this.PerformLayout();

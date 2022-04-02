@@ -36,14 +36,14 @@ namespace CantinaBill.Formulários.Pessoas
             string idpessoa = dgvPessoas.CurrentRow.Cells["idPessoa"].Value.ToString();
             using (CantinaBillEntities db = new CantinaBillEntities())
             {
-               
+
                 var RegistroPessoa = (from pessoa in db.Pessoa
-                                      where idpessoa == pessoa.idPessoa.ToString()
-                                      select pessoa).First();
+                                    where idpessoa == pessoa.idPessoa.ToString()
+                                    select pessoa).First();
 
                 db.Pessoa.Remove(RegistroPessoa);
                 try
-                {
+                 {
                     if (db.SaveChanges() == 1)
                         MessageBox.Show("Registro deletado com sucesso");
                     ExibeDados();
@@ -52,7 +52,7 @@ namespace CantinaBill.Formulários.Pessoas
                 {
                     MessageBox.Show("Erro ao deletar registro");
                 }
-            }
+            }         
         }
 
         private void btnEditar_Click(object sender, EventArgs e)

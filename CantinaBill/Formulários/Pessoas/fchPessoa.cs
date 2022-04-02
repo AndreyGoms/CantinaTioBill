@@ -38,75 +38,80 @@ namespace CantinaBill.Formulários.Pessoas
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-          txtIdPessoa.Text = idpessoa;
-          pessoa.idPessoa = int.Parse(txtIdPessoa.Text);
-
-          if (pessoa.idPessoa == 0)
+            if (txtNome.Text != "" && txtTelefone.Text != "" && txtRua.Text != "" && txtBairro.Text != "" &&
+                txtNumero.Text != "" && txtCidade.Text != "")
             {
-                pessoa.Nome          = txtNome.Text;
-                pessoa.Telefone      = txtTelefone.Text;
-                pessoa.Rua           = txtRua.Text;
-                pessoa.Bairro        = txtBairro.Text;
-                pessoa.Numero        = int.Parse(txtNumero.Text);
-                pessoa.Cidade        = txtCidade.Text;
 
-                using (CantinaBillEntities db = new CantinaBillEntities())
+                txtIdPessoa.Text = idpessoa;
+                pessoa.idPessoa = int.Parse(txtIdPessoa.Text);
+
+                if (pessoa.idPessoa == 0)
                 {
-                    db.Pessoa.Add(pessoa);
+                    pessoa.Nome = txtNome.Text;
+                    pessoa.Telefone = txtTelefone.Text;
+                    pessoa.Rua = txtRua.Text;
+                    pessoa.Bairro = txtBairro.Text;
+                    pessoa.Numero = int.Parse(txtNumero.Text);
+                    pessoa.Cidade = txtCidade.Text;
 
-                    try
+                    using (CantinaBillEntities db = new CantinaBillEntities())
                     {
-                        if (db.SaveChanges() == 1)
-                            MessageBox.Show("Pessoa inserida com sucesso!");
+                        db.Pessoa.Add(pessoa);
 
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Erro ao inserir uma nova pessoa");
-                    }
+                        try
+                        {
+                            if (db.SaveChanges() == 1)
+                                MessageBox.Show("Pessoa inserida com sucesso!");
 
-                    this.Close();
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Erro ao inserir uma nova pessoa");
+                        }
+
+                        this.Close();
+                    }
                 }
-            } 
-            else
-            {
-                pessoa.Nome         = txtNome.Text.Trim();
-                pessoa.Telefone     = txtTelefone.Text.Trim();
-                pessoa.Rua          = txtRua.Text;
-                pessoa.Bairro       = txtBairro.Text.Trim();
-                pessoa.Numero       = int.Parse(txtNumero.Text);
-                pessoa.Cidade       = txtCidade.Text.Trim();
+                else
+                {
+                    pessoa.Nome = txtNome.Text.Trim();
+                    pessoa.Telefone = txtTelefone.Text.Trim();
+                    pessoa.Rua = txtRua.Text;
+                    pessoa.Bairro = txtBairro.Text.Trim();
+                    pessoa.Numero = int.Parse(txtNumero.Text);
+                    pessoa.Cidade = txtCidade.Text.Trim();
 
-                using (CantinaBillEntities db = new CantinaBillEntities())
-                {                    
-                    db.Entry(pessoa).State = EntityState.Modified;
-
-                    try
+                    using (CantinaBillEntities db = new CantinaBillEntities())
                     {
-                        if (db.SaveChanges() == 1)
-                            MessageBox.Show("Registro editado com sucesso");
+                        db.Entry(pessoa).State = EntityState.Modified;
 
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Erro ao editar registro ");
+                        try
+                        {
+                            if (db.SaveChanges() == 1)
+                                MessageBox.Show("Registro editado com sucesso");
+
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Erro ao editar registro ");
+                        }
+
+                        this.Close();
                     }
 
-                    this.Close();
                 }
-
-            }
+            }else
+               MessageBox.Show("Preencha todos os campos!");
 
         }
 
         public void ValidaCampo(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-            (e.KeyChar != '.'))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
             {
                 e.Handled = true;
             }

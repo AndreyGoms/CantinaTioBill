@@ -69,14 +69,30 @@ namespace CantinaBill.Formulários.Vender
             this.btnConcluirPedido = new MetroFramework.Controls.MetroButton();
             this.btnSalvarPedido = new MetroFramework.Controls.MetroButton();
             this.btnAplicar = new MetroFramework.Controls.MetroButton();
+            this.btnRemover = new MetroFramework.Controls.MetroButton();
+            this.IdItemVenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NomeItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pvenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvItens
             // 
+            this.dgvItens.AllowUserToAddRows = false;
             this.dgvItens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItens.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IdItemVenda,
+            this.NomeItem,
+            this.idProd,
+            this.Pvenda,
+            this.Quantidade,
+            this.TotalItem});
             this.dgvItens.Location = new System.Drawing.Point(349, 128);
             this.dgvItens.Name = "dgvItens";
+            this.dgvItens.ReadOnly = true;
             this.dgvItens.Size = new System.Drawing.Size(593, 413);
             this.dgvItens.TabIndex = 0;
             // 
@@ -96,6 +112,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.Size = new System.Drawing.Size(177, 20);
             this.txtTelefone.TabIndex = 20;
+            this.txtTelefone.Text = " ";
             // 
             // metroLabel1
             // 
@@ -113,6 +130,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(63, 20);
             this.txtNumero.TabIndex = 18;
+            this.txtNumero.Text = "0";
             // 
             // lblBairro
             // 
@@ -130,6 +148,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtBairro.Name = "txtBairro";
             this.txtBairro.Size = new System.Drawing.Size(179, 20);
             this.txtBairro.TabIndex = 16;
+            this.txtBairro.Text = "  ";
             // 
             // lblRua
             // 
@@ -147,6 +166,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtRua.Name = "txtRua";
             this.txtRua.Size = new System.Drawing.Size(263, 20);
             this.txtRua.TabIndex = 14;
+            this.txtRua.Text = "  ";
             // 
             // lblNome
             // 
@@ -164,6 +184,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(263, 20);
             this.txtNome.TabIndex = 12;
+            this.txtNome.Text = "  ";
             // 
             // btnSelecionaPessoa
             // 
@@ -191,6 +212,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtIdPessoa.Name = "txtIdPessoa";
             this.txtIdPessoa.Size = new System.Drawing.Size(63, 20);
             this.txtIdPessoa.TabIndex = 23;
+            this.txtIdPessoa.Text = "0";
             // 
             // lblPrecoVenda
             // 
@@ -229,6 +251,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtIdProduto.Name = "txtIdProduto";
             this.txtIdProduto.Size = new System.Drawing.Size(63, 20);
             this.txtIdProduto.TabIndex = 27;
+            this.txtIdProduto.Text = "0";
             // 
             // metroLabel4
             // 
@@ -246,6 +269,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtNomeProduto.Name = "txtNomeProduto";
             this.txtNomeProduto.Size = new System.Drawing.Size(246, 20);
             this.txtNomeProduto.TabIndex = 25;
+            this.txtNomeProduto.Text = "  ";
             // 
             // metroLabel5
             // 
@@ -310,7 +334,7 @@ namespace CantinaBill.Formulários.Vender
             // 
             // btnAddItem
             // 
-            this.btnAddItem.Location = new System.Drawing.Point(90, 250);
+            this.btnAddItem.Location = new System.Drawing.Point(23, 251);
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(132, 23);
             this.btnAddItem.TabIndex = 38;
@@ -455,11 +479,70 @@ namespace CantinaBill.Formulários.Vender
             this.btnAplicar.UseSelectable = true;
             this.btnAplicar.Click += new System.EventHandler(this.btnAplicar_Click);
             // 
+            // btnRemover
+            // 
+            this.btnRemover.Location = new System.Drawing.Point(170, 251);
+            this.btnRemover.Name = "btnRemover";
+            this.btnRemover.Size = new System.Drawing.Size(132, 23);
+            this.btnRemover.TabIndex = 55;
+            this.btnRemover.Text = "Remover Produto";
+            this.btnRemover.UseSelectable = true;
+            this.btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
+            // 
+            // IdItemVenda
+            // 
+            this.IdItemVenda.DataPropertyName = "idItem";
+            this.IdItemVenda.FillWeight = 70F;
+            this.IdItemVenda.HeaderText = "idItem";
+            this.IdItemVenda.Name = "IdItemVenda";
+            this.IdItemVenda.ReadOnly = true;
+            this.IdItemVenda.Width = 70;
+            // 
+            // NomeItem
+            // 
+            this.NomeItem.DataPropertyName = "NomeItem";
+            this.NomeItem.HeaderText = "NomeItem";
+            this.NomeItem.Name = "NomeItem";
+            this.NomeItem.ReadOnly = true;
+            // 
+            // idProd
+            // 
+            this.idProd.DataPropertyName = "idproduto";
+            this.idProd.FillWeight = 70F;
+            this.idProd.HeaderText = "idProduto";
+            this.idProd.Name = "idProd";
+            this.idProd.ReadOnly = true;
+            this.idProd.Width = 70;
+            // 
+            // Pvenda
+            // 
+            this.Pvenda.DataPropertyName = "PVenda";
+            this.Pvenda.HeaderText = "PVenda";
+            this.Pvenda.Name = "Pvenda";
+            this.Pvenda.ReadOnly = true;
+            // 
+            // Quantidade
+            // 
+            this.Quantidade.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Quantidade.DataPropertyName = "Quantidade";
+            this.Quantidade.HeaderText = "Quantidade";
+            this.Quantidade.Name = "Quantidade";
+            this.Quantidade.ReadOnly = true;
+            // 
+            // TotalItem
+            // 
+            this.TotalItem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TotalItem.DataPropertyName = "TotalItem";
+            this.TotalItem.HeaderText = "Total";
+            this.TotalItem.Name = "TotalItem";
+            this.TotalItem.ReadOnly = true;
+            // 
             // frmVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 564);
+            this.Controls.Add(this.btnRemover);
             this.Controls.Add(this.btnAplicar);
             this.Controls.Add(this.btnSalvarPedido);
             this.Controls.Add(this.btnConcluirPedido);
@@ -500,7 +583,10 @@ namespace CantinaBill.Formulários.Vender
             this.Controls.Add(this.lblNome);
             this.Controls.Add(this.txtNome);
             this.Controls.Add(this.dgvItens);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmVenda";
+            this.Resizable = false;
             this.Text = "Venda";
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).EndInit();
             this.ResumeLayout(false);
@@ -550,5 +636,12 @@ namespace CantinaBill.Formulários.Vender
         private MetroFramework.Controls.MetroButton btnConcluirPedido;
         private MetroFramework.Controls.MetroButton btnSalvarPedido;
         private MetroFramework.Controls.MetroButton btnAplicar;
+        private MetroFramework.Controls.MetroButton btnRemover;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdItemVenda;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NomeItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idProd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pvenda;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantidade;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalItem;
     }
 }

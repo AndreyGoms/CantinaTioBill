@@ -143,7 +143,10 @@ namespace CantinaBill.Formulários.Lista_Auxiliar
             this.Controls.Add(this.dgvPessoas);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnSelecionar);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmListaPessoas";
+            this.Resizable = false;
             this.Text = "Lista de Clientes";
             ((System.ComponentModel.ISupportInitialize)(this.dgvPessoas)).EndInit();
             this.ResumeLayout(false);

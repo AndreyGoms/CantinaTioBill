@@ -15,6 +15,7 @@ namespace CantinaBill.Formulários.Vender
                       idproduto, nome_produto, preco_venda;
         string StatusDesconto = "NaoAplicado";
         decimal ValorSubtotal = 0, QtdeAcumulada = 0;
+        int idItem = 1;
         Venda venda = new Venda();
         Item_Venda item_venda = new Item_Venda();
         List<ItemVenda> ListaItem = new List<ItemVenda>();
@@ -28,29 +29,54 @@ namespace CantinaBill.Formulários.Vender
         {
             if (txtIdProduto.Text != "")
             {
-                ItemVenda item_venda = new ItemVenda(int.Parse(txtIdProduto.Text), txtNomeProduto.Text, decimal.Parse(txtPrecoVenda.Text),
-                decimal.Parse(txtTotalItem.Text), decimal.Parse(txtQuantidade.Text));
-
-                ListaItem.Add(item_venda);
-
-                ValorSubtotal = ValorSubtotal + decimal.Parse(txtTotalItem.Text);
-                lblSubtotal.Text = ValorSubtotal.ToString();
-
-                QtdeAcumulada = QtdeAcumulada + item_venda.Quantidade;
-
-                if (((int.Parse(txtQuantidade.Text) == 5) || (ListaItem.Count() == 5) || (QtdeAcumulada >= 5))
-                    && StatusDesconto == "NaoAplicado")
+                if (txtQuantidade.Text != "0")
                 {
-                    txtDesconto.Text = (Math.Round(ValorSubtotal * decimal.Parse("0,0215"), 2)).ToString();
-                    StatusDesconto = "Aplicado";
-                }
-                else if (decimal.Parse(txtDesconto.Text) == 0)
-                    txtDesconto.Text = "0";
+                    ItemVenda item_venda = new ItemVenda(idItem, int.Parse(txtIdProduto.Text), txtNomeProduto.Text, decimal.Parse(txtPrecoVenda.Text),
+                    decimal.Parse(txtTotalItem.Text), decimal.Parse(txtQuantidade.Text));
 
-                dgvItens.DataSource = ListaItem.ToList();
+                    ListaItem.Add(item_venda);
+                    idItem++;
+
+                    ValorSubtotal = ValorSubtotal + decimal.Parse(txtTotalItem.Text);
+                    lblSubtotal.Text = ValorSubtotal.ToString();
+
+                    QtdeAcumulada = QtdeAcumulada + item_venda.Quantidade;
+
+                    if (((int.Parse(txtQuantidade.Text) == 5) || (ListaItem.Count() == 5) || (QtdeAcumulada >= 5))
+                          && StatusDesconto == "NaoAplicado")
+                    {
+                        txtDesconto.Text = (Math.Round(ValorSubtotal * decimal.Parse("0,0215"), 2)).ToString();
+                        StatusDesconto = "Aplicado";
+                    }
+                    else if (decimal.Parse(txtDesconto.Text) == 0)
+                        txtDesconto.Text = "0";
+
+                    dgvItens.DataSource = ListaItem.ToList();
+                }
+                else
+                  MessageBox.Show("Quantidade do produto inválida!");
+            } else
+                MessageBox.Show("Nenhum Produto Selecionado!");
+        }
+
+        private void btnRemover_Click(object sender, EventArgs e)
+        {
+            string iditem = dgvItens.CurrentRow.Cells["IdItemVenda"].Value.ToString();
+
+            foreach(ItemVenda item in ListaItem)
+            {
+                if (item.iditem == int.Parse(iditem))
+                {
+                    ListaItem.Remove(item);
+                    break;
+                }                    
             }
-            else
-                MessageBox.Show("Nenhum produto selecionado!");
+            ExibirDados();
+        }
+
+        void ExibirDados()
+        {
+            dgvItens.DataSource = ListaItem.ToList();
         }
 
         private void btnSelecionaProduto_Click(object sender, EventArgs e)
@@ -105,7 +131,6 @@ namespace CantinaBill.Formulários.Vender
 
         private void btnConcluirPedido_Click(object sender, EventArgs e)
         {
-
             venda.Data_venda = DateTime.Now;
             venda.Desconto = decimal.Parse(txtDesconto.Text);
             venda.idPessoa = int.Parse(txtIdPessoa.Text);
@@ -119,29 +144,29 @@ namespace CantinaBill.Formulários.Vender
                 db.Venda.Add(venda);
 
                 try
-                {
-                    if (db.SaveChanges() == 1)
+                  {
+                      if (db.SaveChanges() == 1)
                         MessageBox.Show("Venda concluída com sucesso!");
 
-                    item_venda.idVenda = venda.idVenda;
+                        item_venda.idVenda = venda.idVenda;
 
-                    foreach (ItemVenda item in ListaItem) {
-                        item_venda.idProduto     = item.idproduto;
-                        item_venda.Quantidade    = item.Quantidade;
-                        item_venda.Val_Un        = item.PVenda;
-                        item_venda.Valor_Total   = item.TotalItem;
+                        foreach (ItemVenda item in ListaItem)
+                        {
+                           item_venda.idProduto = item.idproduto;
+                           item_venda.Quantidade = item.Quantidade;
+                           item_venda.Val_Un = item.PVenda;
+                           item_venda.Valor_Total = item.TotalItem;
 
-                        db.Item_Venda.Add(item_venda);
-                        db.SaveChanges();                            
-                    }
-
+                           db.Item_Venda.Add(item_venda);
+                           db.SaveChanges();
+                            }
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Erro concluir a venda!");
+                   MessageBox.Show("Erro concluir a venda!");
                 }
 
-                this.Close();
+                this.Close();                 
             }
         }
 
@@ -176,7 +201,6 @@ namespace CantinaBill.Formulários.Vender
                         db.Item_Venda.Add(item_venda);
                         db.SaveChanges();
                     }
-
                 }
                 catch (Exception)
                 {

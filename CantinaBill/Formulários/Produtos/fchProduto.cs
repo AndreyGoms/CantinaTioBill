@@ -30,11 +30,11 @@ namespace CantinaBill.Formulários.Produtos
         public void ValidaCampo(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-            (e.KeyChar != '.'))
+            (e.KeyChar != ','))
             {
                 e.Handled = true;
             }
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
             {
                 e.Handled = true;
             }
@@ -47,53 +47,59 @@ namespace CantinaBill.Formulários.Produtos
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            txtIdProduto.Text = idproduto;
-            produto.idProduto = int.Parse(txtIdProduto.Text);
 
-            if (produto.idProduto == 0)
+            if (txtNome.Text != "" && txtPrecoVenda.Text != "")
             {
-                produto.Nome_Produto = txtNome.Text;
-                produto.Preco_Venda = decimal.Parse(txtPrecoVenda.Text);
-                
-                using (CantinaBillEntities db = new CantinaBillEntities())
+                txtIdProduto.Text = idproduto;
+                produto.idProduto = int.Parse(txtIdProduto.Text);
+
+                if (produto.idProduto == 0)
                 {
-                    db.Produto.Add(produto);
+                    produto.Nome_Produto = txtNome.Text;
+                    produto.Preco_Venda = decimal.Parse(txtPrecoVenda.Text);
 
-                    try
+                    using (CantinaBillEntities db = new CantinaBillEntities())
                     {
-                        if (db.SaveChanges() == 1)
-                            MessageBox.Show("Produto inserido com sucesso!");
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Erro ao inserir um novo Produto");
-                    }
+                        db.Produto.Add(produto);
 
-                    this.Close();
+                        try
+                        {
+                            if (db.SaveChanges() == 1)
+                                MessageBox.Show("Produto inserido com sucesso!");
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Erro ao inserir um novo Produto");
+                        }
+
+                        this.Close();
+                    }
                 }
-            } 
+                else
+                {
+                    produto.Nome_Produto = txtNome.Text;
+                    produto.Preco_Venda = decimal.Parse(txtPrecoVenda.Text);
+
+                    using (CantinaBillEntities db = new CantinaBillEntities())
+                    {
+                        db.Entry(produto).State = EntityState.Modified;
+
+                        try
+                        {
+                            if (db.SaveChanges() == 1)
+                                MessageBox.Show("Produto inserido com sucesso!");
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Erro ao inserir um novo Produto");
+                        }
+
+                        this.Close();
+                    }
+                }
+            }
             else
-            {
-                produto.Nome_Produto    = txtNome.Text;
-                produto.Preco_Venda     = decimal.Parse(txtPrecoVenda.Text);
-
-                using (CantinaBillEntities db = new CantinaBillEntities())
-                {
-                    db.Entry(produto).State = EntityState.Modified;
-
-                    try
-                    {
-                        if (db.SaveChanges() == 1)
-                            MessageBox.Show("Produto inserido com sucesso!");
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Erro ao inserir um novo Produto");
-                    }
-
-                    this.Close();
-                }
-            }        
+                MessageBox.Show("Preencha todos os campos!");
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
