@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using CantinaBill.Formulários.Lista_Auxiliar;
 using CantinaBill.Class;
+using CantinaBill.ConexãoDB;
+using System.Windows.Forms;
 
 namespace CantinaBill.Formulários.Vender
 {
@@ -17,6 +13,10 @@ namespace CantinaBill.Formulários.Vender
         
         public string idpessoa, nome, telefone, rua, bairro, cidade, numero,
                       idproduto, nome_produto, preco_venda;
+        string StatusDesconto = "NaoAplicado";
+        decimal ValorSubtotal = 0, QtdeAcumulada = 0;
+        Venda venda = new Venda();
+        Item_Venda item_venda = new Item_Venda();
         List<ItemVenda> ListaItem = new List<ItemVenda>();
 
         public frmVenda()
@@ -24,17 +24,33 @@ namespace CantinaBill.Formulários.Vender
             InitializeComponent();
         }
 
-
         private void btnAddItem_Click(object sender, EventArgs e)
         {
+            if (txtIdProduto.Text != "")
+            {
+                ItemVenda item_venda = new ItemVenda(int.Parse(txtIdProduto.Text), txtNomeProduto.Text, decimal.Parse(txtPrecoVenda.Text),
+                decimal.Parse(txtTotalItem.Text), decimal.Parse(txtQuantidade.Text));
 
-            ItemVenda item_venda = new ItemVenda( txtNomeProduto.Text,  decimal.Parse(txtPrecoVenda.Text),
-            decimal.Parse(txtTotalItem.Text), int.Parse(txtQuantidade.Text));
+                ListaItem.Add(item_venda);
 
-            ListaItem.Add(item_venda);
+                ValorSubtotal = ValorSubtotal + decimal.Parse(txtTotalItem.Text);
+                lblSubtotal.Text = ValorSubtotal.ToString();
 
-            dgvItens.DataSource = ListaItem.ToList();
-            
+                QtdeAcumulada = QtdeAcumulada + item_venda.Quantidade;
+
+                if (((int.Parse(txtQuantidade.Text) == 5) || (ListaItem.Count() == 5) || (QtdeAcumulada >= 5))
+                    && StatusDesconto == "NaoAplicado")
+                {
+                    txtDesconto.Text = (ValorSubtotal * decimal.Parse("0,0215")).ToString();
+                    StatusDesconto = "Aplicado";
+                }
+                else if (decimal.Parse(txtDesconto.Text) == 0)
+                    txtDesconto.Text = "0";
+
+                dgvItens.DataSource = ListaItem.ToList();
+            }
+            else
+                MessageBox.Show("Nenhum produto selecionado!");
         }
 
         private void btnSelecionaProduto_Click(object sender, EventArgs e)
@@ -58,6 +74,14 @@ namespace CantinaBill.Formulários.Vender
             txtBairro.Text = bairro;         
         }
 
+        private void btnAplicar_Click(object sender, EventArgs e)
+        {
+            txtTaxaEntrega.Enabled = false;
+
+            lblValorTotal.Text = (ValorSubtotal - decimal.Parse(txtDesconto.Text) + decimal.Parse(txtTaxaEntrega.Text)).ToString();
+
+        }
+
         private void txtQuantidade_TextChanged(object sender, EventArgs e)
         {
             if(txtQuantidade.Text != "")
@@ -66,8 +90,88 @@ namespace CantinaBill.Formulários.Vender
                 txtTotalItem.Text = "0";
         }
 
+        private void btnConcluirPedido_Click(object sender, EventArgs e)
+        {
 
+            venda.Data_venda = DateTime.Now;
+            venda.Desconto = decimal.Parse(txtDesconto.Text);
+            venda.idPessoa = int.Parse(txtIdPessoa.Text);
+            venda.Taxa_Entrega = decimal.Parse(txtTaxaEntrega.Text);
+            venda.Subtotal = ValorSubtotal;
+            venda.Valor_Total = decimal.Parse(lblValorTotal.Text);
+            venda.Status = "F";
 
+            using (CantinaBillEntities db = new CantinaBillEntities())
+            {
+                db.Venda.Add(venda);
 
+                try
+                {
+                    if (db.SaveChanges() == 1)
+                        MessageBox.Show("Venda concluída com sucesso!");
+
+                    item_venda.idVenda = venda.idVenda;
+
+                    foreach (ItemVenda item in ListaItem) {
+                        item_venda.idProduto     = item.idproduto;
+                        item_venda.Quantidade    = item.Quantidade;
+                        item_venda.Val_Un        = item.PVenda;
+                        item_venda.Valor_Total   = item.TotalItem;
+
+                        db.Item_Venda.Add(item_venda);
+                        db.SaveChanges();                            
+                    }
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Erro concluir a venda!");
+                }
+
+                this.Close();
+            }
+        }
+
+        private void btnSalvarPedido_Click(object sender, EventArgs e)
+        {
+            venda.Data_venda = DateTime.Now;
+            venda.Desconto = decimal.Parse(txtDesconto.Text);
+            venda.idPessoa = int.Parse(txtIdPessoa.Text);
+            venda.Taxa_Entrega = decimal.Parse(txtTaxaEntrega.Text);
+            venda.Subtotal = ValorSubtotal;
+            venda.Valor_Total = decimal.Parse(lblValorTotal.Text);
+            venda.Status = "A";
+
+            using (CantinaBillEntities db = new CantinaBillEntities())
+            {
+                db.Venda.Add(venda);
+
+                try
+                {
+                    if (db.SaveChanges() == 1)
+                        MessageBox.Show("Pedido armazenado com sucesso!");
+
+                    item_venda.idVenda = venda.idVenda;
+
+                    foreach (ItemVenda item in ListaItem)
+                    {
+                        item_venda.idProduto = item.idproduto;
+                        item_venda.Quantidade = item.Quantidade;
+                        item_venda.Val_Un = item.PVenda;
+                        item_venda.Valor_Total = item.TotalItem;
+
+                        db.Item_Venda.Add(item_venda);
+                        db.SaveChanges();
+                    }
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Erro armazenar o pedido!");
+                }
+
+                this.Close();
+            }
+        }
     }
 }

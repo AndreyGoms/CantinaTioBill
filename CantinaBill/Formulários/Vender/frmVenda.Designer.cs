@@ -56,6 +56,19 @@ namespace CantinaBill.Formulários.Vender
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
             this.btnSelecionaProduto = new MetroFramework.Controls.MetroButton();
             this.btnAddItem = new MetroFramework.Controls.MetroButton();
+            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
+            this.txtDesconto = new System.Windows.Forms.TextBox();
+            this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
+            this.txtTaxaEntrega = new System.Windows.Forms.TextBox();
+            this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.lblSubtotal = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
+            this.lblValorTotal = new MetroFramework.Controls.MetroLabel();
+            this.btnConcluirPedido = new MetroFramework.Controls.MetroButton();
+            this.btnSalvarPedido = new MetroFramework.Controls.MetroButton();
+            this.btnAplicar = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,7 +77,7 @@ namespace CantinaBill.Formulários.Vender
             this.dgvItens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItens.Location = new System.Drawing.Point(349, 128);
             this.dgvItens.Name = "dgvItens";
-            this.dgvItens.Size = new System.Drawing.Size(593, 352);
+            this.dgvItens.Size = new System.Drawing.Size(593, 413);
             this.dgvItens.TabIndex = 0;
             // 
             // metroLabel3
@@ -78,6 +91,7 @@ namespace CantinaBill.Formulários.Vender
             // 
             // txtTelefone
             // 
+            this.txtTelefone.Enabled = false;
             this.txtTelefone.Location = new System.Drawing.Point(537, 97);
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.Size = new System.Drawing.Size(177, 20);
@@ -94,6 +108,7 @@ namespace CantinaBill.Formulários.Vender
             // 
             // txtNumero
             // 
+            this.txtNumero.Enabled = false;
             this.txtNumero.Location = new System.Drawing.Point(876, 46);
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(63, 20);
@@ -110,6 +125,7 @@ namespace CantinaBill.Formulários.Vender
             // 
             // txtBairro
             // 
+            this.txtBairro.Enabled = false;
             this.txtBairro.Location = new System.Drawing.Point(350, 97);
             this.txtBairro.Name = "txtBairro";
             this.txtBairro.Size = new System.Drawing.Size(179, 20);
@@ -126,6 +142,7 @@ namespace CantinaBill.Formulários.Vender
             // 
             // txtRua
             // 
+            this.txtRua.Enabled = false;
             this.txtRua.Location = new System.Drawing.Point(606, 46);
             this.txtRua.Name = "txtRua";
             this.txtRua.Size = new System.Drawing.Size(263, 20);
@@ -142,6 +159,7 @@ namespace CantinaBill.Formulários.Vender
             // 
             // txtNome
             // 
+            this.txtNome.Enabled = false;
             this.txtNome.Location = new System.Drawing.Point(337, 46);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(263, 20);
@@ -162,12 +180,13 @@ namespace CantinaBill.Formulários.Vender
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.Location = new System.Drawing.Point(271, 24);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(21, 19);
+            this.metroLabel2.Size = new System.Drawing.Size(65, 19);
             this.metroLabel2.TabIndex = 24;
-            this.metroLabel2.Text = "ID";
+            this.metroLabel2.Text = "ID Cliente";
             // 
             // txtIdPessoa
             // 
+            this.txtIdPessoa.Enabled = false;
             this.txtIdPessoa.Location = new System.Drawing.Point(269, 46);
             this.txtIdPessoa.Name = "txtIdPessoa";
             this.txtIdPessoa.Size = new System.Drawing.Size(63, 20);
@@ -221,6 +240,7 @@ namespace CantinaBill.Formulários.Vender
             // 
             // txtNomeProduto
             // 
+            this.txtNomeProduto.Enabled = false;
             this.txtNomeProduto.Location = new System.Drawing.Point(68, 150);
             this.txtNomeProduto.Name = "txtNomeProduto";
             this.txtNomeProduto.Size = new System.Drawing.Size(246, 20);
@@ -242,6 +262,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtQuantidade.Name = "txtQuantidade";
             this.txtQuantidade.Size = new System.Drawing.Size(77, 20);
             this.txtQuantidade.TabIndex = 31;
+            this.txtQuantidade.Text = "0";
             this.txtQuantidade.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtQuantidade.TextChanged += new System.EventHandler(this.txtQuantidade_TextChanged);
             // 
@@ -251,6 +272,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtTotalItem.Name = "txtTotalItem";
             this.txtTotalItem.Size = new System.Drawing.Size(77, 20);
             this.txtTotalItem.TabIndex = 33;
+            this.txtTotalItem.Text = "0";
             this.txtTotalItem.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // metroLabel7
@@ -293,11 +315,159 @@ namespace CantinaBill.Formulários.Vender
             this.btnAddItem.UseSelectable = true;
             this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
+            // metroLabel10
+            // 
+            this.metroLabel10.AutoSize = true;
+            this.metroLabel10.Location = new System.Drawing.Point(68, 347);
+            this.metroLabel10.Name = "metroLabel10";
+            this.metroLabel10.Size = new System.Drawing.Size(78, 19);
+            this.metroLabel10.TabIndex = 43;
+            this.metroLabel10.Text = "Desconto %";
+            this.metroLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtDesconto
+            // 
+            this.txtDesconto.Enabled = false;
+            this.txtDesconto.Location = new System.Drawing.Point(68, 369);
+            this.txtDesconto.Name = "txtDesconto";
+            this.txtDesconto.Size = new System.Drawing.Size(77, 20);
+            this.txtDesconto.TabIndex = 42;
+            this.txtDesconto.Text = "0";
+            this.txtDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // metroLabel11
+            // 
+            this.metroLabel11.AutoSize = true;
+            this.metroLabel11.Location = new System.Drawing.Point(169, 347);
+            this.metroLabel11.Name = "metroLabel11";
+            this.metroLabel11.Size = new System.Drawing.Size(83, 19);
+            this.metroLabel11.TabIndex = 45;
+            this.metroLabel11.Text = "Taxa Entrega";
+            this.metroLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtTaxaEntrega
+            // 
+            this.txtTaxaEntrega.Location = new System.Drawing.Point(169, 369);
+            this.txtTaxaEntrega.Name = "txtTaxaEntrega";
+            this.txtTaxaEntrega.Size = new System.Drawing.Size(77, 20);
+            this.txtTaxaEntrega.TabIndex = 44;
+            this.txtTaxaEntrega.Text = "0";
+            this.txtTaxaEntrega.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // metroLabel9
+            // 
+            this.metroLabel9.AutoSize = true;
+            this.metroLabel9.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel9.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel9.Location = new System.Drawing.Point(33, 300);
+            this.metroLabel9.Name = "metroLabel9";
+            this.metroLabel9.Size = new System.Drawing.Size(102, 25);
+            this.metroLabel9.TabIndex = 48;
+            this.metroLabel9.Text = "SUBTOTAL";
+            // 
+            // metroLabel6
+            // 
+            this.metroLabel6.AutoSize = true;
+            this.metroLabel6.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel6.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel6.Location = new System.Drawing.Point(170, 300);
+            this.metroLabel6.Name = "metroLabel6";
+            this.metroLabel6.Size = new System.Drawing.Size(34, 25);
+            this.metroLabel6.TabIndex = 47;
+            this.metroLabel6.Text = "R$";
+            // 
+            // lblSubtotal
+            // 
+            this.lblSubtotal.AutoSize = true;
+            this.lblSubtotal.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblSubtotal.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblSubtotal.Location = new System.Drawing.Point(224, 300);
+            this.lblSubtotal.Name = "lblSubtotal";
+            this.lblSubtotal.Size = new System.Drawing.Size(47, 25);
+            this.lblSubtotal.TabIndex = 46;
+            this.lblSubtotal.Text = "0,00";
+            // 
+            // metroLabel12
+            // 
+            this.metroLabel12.AutoSize = true;
+            this.metroLabel12.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel12.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel12.Location = new System.Drawing.Point(14, 414);
+            this.metroLabel12.Name = "metroLabel12";
+            this.metroLabel12.Size = new System.Drawing.Size(131, 25);
+            this.metroLabel12.TabIndex = 51;
+            this.metroLabel12.Text = "VALOR TOTAL";
+            // 
+            // metroLabel13
+            // 
+            this.metroLabel13.AutoSize = true;
+            this.metroLabel13.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel13.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel13.Location = new System.Drawing.Point(170, 414);
+            this.metroLabel13.Name = "metroLabel13";
+            this.metroLabel13.Size = new System.Drawing.Size(34, 25);
+            this.metroLabel13.TabIndex = 50;
+            this.metroLabel13.Text = "R$";
+            // 
+            // lblValorTotal
+            // 
+            this.lblValorTotal.AutoSize = true;
+            this.lblValorTotal.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblValorTotal.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblValorTotal.Location = new System.Drawing.Point(224, 414);
+            this.lblValorTotal.Name = "lblValorTotal";
+            this.lblValorTotal.Size = new System.Drawing.Size(47, 25);
+            this.lblValorTotal.TabIndex = 49;
+            this.lblValorTotal.Text = "0,00";
+            // 
+            // btnConcluirPedido
+            // 
+            this.btnConcluirPedido.Location = new System.Drawing.Point(25, 488);
+            this.btnConcluirPedido.Name = "btnConcluirPedido";
+            this.btnConcluirPedido.Size = new System.Drawing.Size(121, 53);
+            this.btnConcluirPedido.TabIndex = 52;
+            this.btnConcluirPedido.Text = "Concluir Pedido";
+            this.btnConcluirPedido.UseSelectable = true;
+            this.btnConcluirPedido.Click += new System.EventHandler(this.btnConcluirPedido_Click);
+            // 
+            // btnSalvarPedido
+            // 
+            this.btnSalvarPedido.Location = new System.Drawing.Point(152, 488);
+            this.btnSalvarPedido.Name = "btnSalvarPedido";
+            this.btnSalvarPedido.Size = new System.Drawing.Size(121, 53);
+            this.btnSalvarPedido.TabIndex = 53;
+            this.btnSalvarPedido.Text = "Salvar Pedido";
+            this.btnSalvarPedido.UseSelectable = true;
+            this.btnSalvarPedido.Click += new System.EventHandler(this.btnSalvarPedido_Click);
+            // 
+            // btnAplicar
+            // 
+            this.btnAplicar.Location = new System.Drawing.Point(249, 368);
+            this.btnAplicar.Name = "btnAplicar";
+            this.btnAplicar.Size = new System.Drawing.Size(71, 23);
+            this.btnAplicar.TabIndex = 54;
+            this.btnAplicar.Text = "Aplicar";
+            this.btnAplicar.UseSelectable = true;
+            this.btnAplicar.Click += new System.EventHandler(this.btnAplicar_Click);
+            // 
             // frmVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(946, 534);
+            this.ClientSize = new System.Drawing.Size(946, 564);
+            this.Controls.Add(this.btnAplicar);
+            this.Controls.Add(this.btnSalvarPedido);
+            this.Controls.Add(this.btnConcluirPedido);
+            this.Controls.Add(this.metroLabel12);
+            this.Controls.Add(this.metroLabel13);
+            this.Controls.Add(this.lblValorTotal);
+            this.Controls.Add(this.metroLabel9);
+            this.Controls.Add(this.metroLabel6);
+            this.Controls.Add(this.lblSubtotal);
+            this.Controls.Add(this.metroLabel11);
+            this.Controls.Add(this.txtTaxaEntrega);
+            this.Controls.Add(this.metroLabel10);
+            this.Controls.Add(this.txtDesconto);
             this.Controls.Add(this.btnAddItem);
             this.Controls.Add(this.btnSelecionaProduto);
             this.Controls.Add(this.metroLabel8);
@@ -362,5 +532,18 @@ namespace CantinaBill.Formulários.Vender
         private MetroFramework.Controls.MetroLabel metroLabel8;
         private MetroFramework.Controls.MetroButton btnSelecionaProduto;
         private MetroFramework.Controls.MetroButton btnAddItem;
+        private MetroFramework.Controls.MetroLabel metroLabel10;
+        private System.Windows.Forms.TextBox txtDesconto;
+        private MetroFramework.Controls.MetroLabel metroLabel11;
+        private System.Windows.Forms.TextBox txtTaxaEntrega;
+        private MetroFramework.Controls.MetroLabel metroLabel9;
+        private MetroFramework.Controls.MetroLabel metroLabel6;
+        private MetroFramework.Controls.MetroLabel lblSubtotal;
+        private MetroFramework.Controls.MetroLabel metroLabel12;
+        private MetroFramework.Controls.MetroLabel metroLabel13;
+        private MetroFramework.Controls.MetroLabel lblValorTotal;
+        private MetroFramework.Controls.MetroButton btnConcluirPedido;
+        private MetroFramework.Controls.MetroButton btnSalvarPedido;
+        private MetroFramework.Controls.MetroButton btnAplicar;
     }
 }
