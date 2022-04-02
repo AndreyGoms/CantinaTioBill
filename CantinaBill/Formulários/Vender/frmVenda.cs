@@ -41,7 +41,7 @@ namespace CantinaBill.Formulários.Vender
                 if (((int.Parse(txtQuantidade.Text) == 5) || (ListaItem.Count() == 5) || (QtdeAcumulada >= 5))
                     && StatusDesconto == "NaoAplicado")
                 {
-                    txtDesconto.Text = (ValorSubtotal * decimal.Parse("0,0215")).ToString();
+                    txtDesconto.Text = (Math.Round(ValorSubtotal * decimal.Parse("0,0215"), 2)).ToString();
                     StatusDesconto = "Aplicado";
                 }
                 else if (decimal.Parse(txtDesconto.Text) == 0)
@@ -76,7 +76,7 @@ namespace CantinaBill.Formulários.Vender
 
         private void btnAplicar_Click(object sender, EventArgs e)
         {
-            txtTaxaEntrega.Enabled = false;
+            txtTaxaEntrega.Enabled  = txtPrecoVenda.Enabled = txtTotalItem.Enabled = false;
 
             lblValorTotal.Text = (ValorSubtotal - decimal.Parse(txtDesconto.Text) + decimal.Parse(txtTaxaEntrega.Text)).ToString();
 
