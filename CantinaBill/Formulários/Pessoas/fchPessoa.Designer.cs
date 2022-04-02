@@ -110,6 +110,7 @@ namespace CantinaBill.Formulários.Pessoas
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(63, 20);
             this.txtNumero.TabIndex = 6;
+            this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidaCampo);
             // 
             // lblIdPessoa
             // 
@@ -204,7 +205,7 @@ namespace CantinaBill.Formulários.Pessoas
             this.Controls.Add(this.lblNome);
             this.Controls.Add(this.txtNome);
             this.Name = "fchPessoa";
-            this.Text = "Cadastrar Pessoa";            
+            this.Text = "Cadastrar Pessoa";
             this.ResumeLayout(false);
             this.PerformLayout();
 

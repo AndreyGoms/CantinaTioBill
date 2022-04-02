@@ -210,6 +210,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtPrecoVenda.TabIndex = 29;
             this.txtPrecoVenda.Text = "0";
             this.txtPrecoVenda.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPrecoVenda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidaCampo);
             // 
             // lblIdProduto
             // 
@@ -265,6 +266,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtQuantidade.Text = "0";
             this.txtQuantidade.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtQuantidade.TextChanged += new System.EventHandler(this.txtQuantidade_TextChanged);
+            this.txtQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidaCampo);
             // 
             // txtTotalItem
             // 
@@ -274,6 +276,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtTotalItem.TabIndex = 33;
             this.txtTotalItem.Text = "0";
             this.txtTotalItem.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtTotalItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidaCampo);
             // 
             // metroLabel7
             // 
@@ -334,6 +337,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtDesconto.TabIndex = 42;
             this.txtDesconto.Text = "0";
             this.txtDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtDesconto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidaCampo);
             // 
             // metroLabel11
             // 
@@ -353,6 +357,7 @@ namespace CantinaBill.Formulários.Vender
             this.txtTaxaEntrega.TabIndex = 44;
             this.txtTaxaEntrega.Text = "0";
             this.txtTaxaEntrega.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtTaxaEntrega.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidaCampo);
             // 
             // metroLabel9
             // 

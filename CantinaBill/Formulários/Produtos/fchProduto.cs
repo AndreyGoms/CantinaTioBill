@@ -11,7 +11,6 @@ namespace CantinaBill.Formulários.Produtos
         Produto produto = new Produto();
         public string idproduto, nome_produto, preco_venda;
 
-
         public fchProduto(lstProdutos parent)
         {
             InitializeComponent();
@@ -26,6 +25,24 @@ namespace CantinaBill.Formulários.Produtos
             txtIdProduto.Text       = idproduto;
             txtNome.Text            = nome_produto;
             txtPrecoVenda.Text      = preco_venda; 
+        }
+
+        public void ValidaCampo(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPrecoVenda_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidaCampo(sender, e);
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -54,7 +71,6 @@ namespace CantinaBill.Formulários.Produtos
 
                     this.Close();
                 }
-
             } 
             else
             {
@@ -77,9 +93,7 @@ namespace CantinaBill.Formulários.Produtos
 
                     this.Close();
                 }
-
-            }
-        
+            }        
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

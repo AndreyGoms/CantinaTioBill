@@ -91,6 +91,7 @@ namespace CantinaBill.Formulários.Produtos
             this.txtPrecoVenda.Name = "txtPrecoVenda";
             this.txtPrecoVenda.Size = new System.Drawing.Size(77, 20);
             this.txtPrecoVenda.TabIndex = 16;
+            this.txtPrecoVenda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecoVenda_KeyPress);
             // 
             // btnCancelar
             // 
