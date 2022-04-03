@@ -67,6 +67,15 @@ namespace CantinaBill.Formulários.Vender
             {
                 if (item.iditem == int.Parse(iditem))
                 {
+                    QtdeAcumulada= QtdeAcumulada - item.Quantidade;
+                    lblSubtotal.Text = (ValorSubtotal - item.TotalItem).ToString();
+                    ValorSubtotal = ValorSubtotal - item.TotalItem;
+
+                    if ((ListaItem.Count() < 5) || (QtdeAcumulada <= 5)) {
+                        txtDesconto.Text = "0";
+                        StatusDesconto = "NaoAplicado";
+                    }
+
                     ListaItem.Remove(item);
                     break;
                 }                    
